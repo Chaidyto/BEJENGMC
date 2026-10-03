@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, Shield, ShoppingBag, Home, User, Settings, MessageSquare } from "lucide-react";
 import CopyIpButton from "./CopyIpButton";
+import { getAssetPath } from "@/lib/assets";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -24,7 +25,7 @@ export default function Navbar() {
         <Link href="/" className="flex items-center gap-3 group">
           <div className="relative flex h-11 w-11 items-center justify-center rounded-xl bg-slate-900 border border-amber-500/40 p-0.5 group-hover:border-amber-400/70 transition-all shadow-[0_0_15px_rgba(245,158,11,0.25)] overflow-hidden">
             <img
-              src="/logo.png"
+              src={getAssetPath("/logo.png")}
               alt="BeJengMC Logo"
               width={44}
               height={44}

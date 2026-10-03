@@ -1,4 +1,5 @@
 import React from "react";
+import { getAssetPath } from "@/lib/assets";
 
 interface IconProps {
   className?: string;
@@ -17,7 +18,7 @@ export function RankIcon({ type, imageUrl, className = "", size = "md" }: { type
     return (
       <div className={`relative flex items-center justify-center rounded-xl bg-slate-900/80 border border-slate-700/80 p-2 shadow-lg overflow-hidden group ${sizeClasses[size]} ${className}`}>
         <img
-          src={imageUrl}
+          src={getAssetPath(imageUrl)}
           alt={type}
           className="w-full h-full object-contain [image-rendering:pixelated] drop-shadow-[0_0_12px_rgba(255,255,255,0.4)] transition-transform duration-200 group-hover:scale-110"
         />
@@ -112,7 +113,7 @@ export function ItemIcon({ type, imageUrl, className = "", size = "md" }: { type
     return (
       <div className={`relative flex items-center justify-center rounded-xl bg-slate-900/80 border border-slate-700/80 p-2 shadow-lg overflow-hidden group ${sizeClasses[size]} ${className}`}>
         <img
-          src={imageUrl}
+          src={getAssetPath(imageUrl)}
           alt={type}
           className="w-full h-full object-contain [image-rendering:pixelated] drop-shadow-[0_0_10px_rgba(255,255,255,0.35)] transition-transform duration-200 group-hover:scale-110"
         />
