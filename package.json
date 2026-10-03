@@ -1,0 +1,10 @@
+{
+  "name": "bejengmc-workspace",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix bejengmc run dev",
+    "build": "npm --prefix bejengmc run build",
+    "start": "npm --prefix bejengmc start"
+  }
+}

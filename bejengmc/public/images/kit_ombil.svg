@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <filter id="ombilKitGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0" stdDeviation="3.5" flood-color="#C084FC" flood-opacity="0.8"/>
+    </filter>
+    <linearGradient id="ombilChestGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7E22CE"/>
+      <stop offset="50%" stop-color="#581C87"/>
+      <stop offset="100%" stop-color="#2E1065"/>
+    </linearGradient>
+  </defs>
+  <g filter="url(#ombilKitGlow)">
+    <!-- Chest Base -->
+    <rect x="10" y="24" width="44" height="28" rx="4" fill="url(#ombilChestGrad)" stroke="#C084FC" stroke-width="2"/>
+    <!-- Chest Lid -->
+    <rect x="8" y="16" width="48" height="12" rx="3" fill="#9333EA" stroke="#E9D5FF" stroke-width="2"/>
+    <!-- Amethyst / Gold Trim -->
+    <rect x="18" y="16" width="4" height="36" fill="#D8B4FE" stroke="#FAF5FF" stroke-width="0.75"/>
+    <rect x="42" y="16" width="4" height="36" fill="#D8B4FE" stroke="#FAF5FF" stroke-width="0.75"/>
+    <!-- Rune Latch -->
+    <rect x="28" y="22" width="8" height="10" rx="1.5" fill="#F472B6" stroke="#FFF" stroke-width="1.5"/>
+    <circle cx="32" cy="27" r="1.5" fill="#581C87"/>
+  </g>
+  <!-- Mystical Sparkles -->
+  <polygon points="14,14 16,17 19,18 16,19 15,22 13,19 10,18 13,17" fill="#FDF4FF"/>
+  <polygon points="48,12 50,15 53,16 50,17 49,20 47,17 44,16 47,15" fill="#FDF4FF"/>
+</svg>

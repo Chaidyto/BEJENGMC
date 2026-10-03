@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+bejengmc/node_modules/
+/.pnp
+.pnp.js
+
+# Build outputs
+.next/
+bejengmc/.next/
+out/
+bejengmc/out/
+build/
+bejengmc/build/
+
+# IDE / OS
+.tools/
+.vscode/*
+!.vscode/launch.json
+.idea/
+.DS_Store
+*.pem
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment
+.env*.local
+.env
