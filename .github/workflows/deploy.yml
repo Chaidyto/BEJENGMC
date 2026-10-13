@@ -34,6 +34,13 @@ jobs:
         working-directory: ./bejengmc
         run: npm run build
 
+      - name: Prepare GitHub Pages Static Files
+        run: |
+          touch ./bejengmc/out/.nojekyll
+          if [ -f CNAME ]; then cp CNAME ./bejengmc/out/CNAME; fi
+          if [ -f bejengmc/CNAME ]; then cp bejengmc/CNAME ./bejengmc/out/CNAME; fi
+          if [ -f bejengmc/public/CNAME ]; then cp bejengmc/public/CNAME ./bejengmc/out/CNAME; fi
+
       - name: Upload GitHub Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:

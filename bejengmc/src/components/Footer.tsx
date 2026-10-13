@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Shield } from "lucide-react";
 import { getAssetPath } from "@/lib/assets";
+import BrandLogo from "./BrandLogo";
 
 export default function Footer() {
   return (
@@ -10,8 +11,7 @@ export default function Footer() {
           <div className="space-y-4 md:col-span-2">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-900 border border-amber-500/40 p-0.5 overflow-hidden shadow-md">
-                <img
-                  src={getAssetPath("/logo.png")}
+                <BrandLogo
                   alt="BeJengMC Logo"
                   width={40}
                   height={40}

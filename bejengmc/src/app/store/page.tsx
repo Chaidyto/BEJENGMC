@@ -10,6 +10,7 @@ import RankDetailModal from "@/components/RankDetailModal";
 import ItemDetailModal from "@/components/ItemDetailModal";
 import CheckoutModal from "@/components/CheckoutModal";
 import { getAssetPath } from "@/lib/assets";
+import BrandLogo from "@/components/BrandLogo";
 
 export default function StorePage() {
   const [activeTab, setActiveTab] = useState<"RANK" | "ITEMS">("RANK");
@@ -76,8 +77,7 @@ export default function StorePage() {
           </div>
 
           <div className="relative z-10 shrink-0">
-            <img
-              src={getAssetPath("/logo.png")}
+            <BrandLogo
               alt="BeJengMC Server Logo"
               width={176}
               height={176}

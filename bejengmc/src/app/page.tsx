@@ -3,6 +3,7 @@ import CopyIpButton from "@/components/CopyIpButton";
 import { Swords, Shield, Zap, Sparkles, ArrowRight, ShoppingBag, ShoppingCart, MessageSquare, Crown, Package } from "lucide-react";
 import { STORE_RANKS } from "@/data/store-data";
 import { getAssetPath } from "@/lib/assets";
+import BrandLogo from "@/components/BrandLogo";
 
 export default function HomePage() {
   const gameModes = [
@@ -39,8 +40,7 @@ export default function HomePage() {
           {/* Official Server Logo */}
           <div className="relative mx-auto flex items-center justify-center pt-2">
             <div className="absolute -inset-6 rounded-full bg-gradient-to-r from-amber-500/25 via-red-500/25 to-amber-500/25 blur-3xl opacity-80" />
-            <img
-              src={getAssetPath("/logo.png")}
+            <BrandLogo
               alt="BeJengMC Official Server Logo"
               width={280}
               height={280}
