@@ -9,6 +9,7 @@ import ItemCard from "@/components/ItemCard";
 import RankDetailModal from "@/components/RankDetailModal";
 import ItemDetailModal from "@/components/ItemDetailModal";
 import CheckoutModal from "@/components/CheckoutModal";
+import { getAssetPath } from "@/lib/assets";
 
 export default function StorePage() {
   const [activeTab, setActiveTab] = useState<"RANK" | "ITEMS">("RANK");
@@ -76,7 +77,7 @@ export default function StorePage() {
 
           <div className="relative z-10 shrink-0">
             <img
-              src="/logo.png"
+              src={getAssetPath("/logo.png")}
               alt="BeJengMC Server Logo"
               width={176}
               height={176}
