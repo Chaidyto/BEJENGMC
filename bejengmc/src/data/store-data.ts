@@ -96,10 +96,40 @@ export const DISCORD_LINK = "https://discord.gg/wY4ejbNVqB";
 export const TELEGRAM_USERNAME = "to_chaidy";
 export const TELEGRAM_LINK = "https://t.me/to_chaidy";
 
+// Official KHQR Configuration (Bakong / ABA / Wing / ACLEDA / All KH Banks)
+export interface KhqrConfig {
+  merchantName: string;
+  bankName: string;
+  accountNumber: string;
+  qrImagePath: string;
+  exchangeRateUsdToKhr: number;
+}
+
+export const KHQR_CONFIG: KhqrConfig = {
+  merchantName: "TO CHAIDY",
+  bankName: "ABA Bank / Bakong KHQR",
+  accountNumber: "000 000 000",
+  qrImagePath: "/images/khqr.png",
+  exchangeRateUsdToKhr: 4100, // 1 USD ≈ 4,100 KHR
+};
+
+export function getKhqrTelegramConfirmationUrl(
+  productName: string,
+  priceUsd: number,
+  playerIgn?: string,
+  edition: string = "JAVA"
+) {
+  const khrPrice = Math.round(priceUsd * KHQR_CONFIG.exchangeRateUsdToKhr);
+  const ign = playerIgn && playerIgn.trim() ? playerIgn.trim() : "Steve";
+  const memo = `${productName} - ${ign}`;
+  const text = `🇰🇭 [KHQR PAYMENT RECEIPT]\n\nHello @${TELEGRAM_USERNAME}! I just scanned and paid via KHQR for:\n\n• Product: ${productName}\n• Price: $${priceUsd.toFixed(2)} USD (~${khrPrice.toLocaleString()} KHR)\n• Minecraft IGN: ${ign} (${edition})\n• Transfer Remark: ${memo}\n\nHere is my payment receipt / slip screenshot. Please verify and deliver to my in-game account. Thank you!`;
+  return `https://t.me/${TELEGRAM_USERNAME}?text=${encodeURIComponent(text)}`;
+}
+
 export function getTelegramOrderUrl(productName: string, price: number, playerIgn?: string, edition: string = "JAVA") {
   const ignText = playerIgn && playerIgn.trim() ? `\n• Minecraft In-Game Name: ${playerIgn.trim()} (${edition})` : "";
   const text = `👋 Hello! I would like to purchase from the BEJENGMC Store:\n\n• Item/Rank: ${productName}\n• Price: $${price.toFixed(2)} USD${ignText}\n\nPlease send me payment info (ABA / Bakong / Wing / Bank / Crypto) so I can complete the purchase. Thank you!`;
-  return `https://t.me/to_chaidy?text=${encodeURIComponent(text)}`;
+  return `https://t.me/${TELEGRAM_USERNAME}?text=${encodeURIComponent(text)}`;
 }
 
 // Full Minecraft Kit Item Definitions
