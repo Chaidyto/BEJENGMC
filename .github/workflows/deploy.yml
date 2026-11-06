@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -45,6 +45,13 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./bejengmc/out
+
+      - name: Deploy to gh-pages branch (dual support)
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: ./bejengmc/out
+          branch: gh-pages
+
 
   deploy:
     environment:
