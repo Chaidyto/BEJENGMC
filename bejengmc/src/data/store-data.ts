@@ -100,16 +100,18 @@ export const TELEGRAM_LINK = "https://t.me/to_chaidy";
 export interface KhqrConfig {
   merchantName: string;
   bankName: string;
-  accountNumber: string;
+  accountUsd: string;
+  accountKhr: string;
   qrImagePath: string;
   exchangeRateUsdToKhr: number;
 }
 
 export const KHQR_CONFIG: KhqrConfig = {
-  merchantName: "TO CHAIDY",
-  bankName: "ABA Bank / Bakong KHQR",
-  accountNumber: "000 000 000",
-  qrImagePath: "/images/khqr.png",
+  merchantName: "CHAIDY TO",
+  bankName: "ABA BANK (KHQR)",
+  accountUsd: "003 327 759",
+  accountKhr: "600 632 533",
+  qrImagePath: "/images/aba_khqr.jpg",
   exchangeRateUsdToKhr: 4100, // 1 USD ≈ 4,100 KHR
 };
 

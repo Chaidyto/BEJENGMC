@@ -13,6 +13,8 @@ import {
   ExternalLink,
   Sparkles,
   CheckCircle2,
+  Building2,
+  DollarSign,
 } from "lucide-react";
 import {
   RankData,
@@ -36,7 +38,7 @@ export default function CheckoutModal({ product, onClose }: CheckoutModalProps) 
   const [username, setUsername] = useState("");
   const [edition, setEdition] = useState<"JAVA" | "BEDROCK">("JAVA");
   const [paymentMethod, setPaymentMethod] = useState<"KHQR" | "TELEGRAM">("KHQR");
-  const [copiedRemark, setCopiedRemark] = useState(false);
+  const [copiedKey, setCopiedKey] = useState<string | null>(null);
   const [qrImageSrc, setQrImageSrc] = useState(getAssetPath(KHQR_CONFIG.qrImagePath));
 
   if (!product) return null;
@@ -49,16 +51,16 @@ export default function CheckoutModal({ product, onClose }: CheckoutModalProps) 
   const telegramDirectUrl = getTelegramOrderUrl(product.name, product.price, username, edition);
   const khqrConfirmUrl = getKhqrTelegramConfirmationUrl(product.name, product.price, username, edition);
 
-  const handleCopyRemark = () => {
+  const handleCopy = (key: string, text: string) => {
     if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText(transferMemo);
-      setCopiedRemark(true);
-      setTimeout(() => setCopiedRemark(false), 2200);
+      navigator.clipboard.writeText(text);
+      setCopiedKey(key);
+      setTimeout(() => setCopiedKey(null), 2000);
     }
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-8">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 md:p-8">
       {/* Backdrop */}
       <div
         onClick={onClose}
@@ -87,9 +89,9 @@ export default function CheckoutModal({ product, onClose }: CheckoutModalProps) 
         </div>
 
         {/* Scrollable Content */}
-        <div className="p-5 sm:p-6 space-y-4 overflow-y-auto">
+        <div className="p-4 sm:p-6 space-y-4 overflow-y-auto">
           {/* Item Order Summary Card */}
-          <div className="rounded-2xl border border-slate-800 bg-slate-950 p-4 flex items-center justify-between gap-3">
+          <div className="rounded-2xl border border-slate-800 bg-slate-950 p-3.5 sm:p-4 flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
               {isRank ? (
                 <RankIcon type={product.iconType} imageUrl={(product as RankData).imageUrl} size="sm" />
@@ -174,23 +176,23 @@ export default function CheckoutModal({ product, onClose }: CheckoutModalProps) 
               <button
                 type="button"
                 onClick={() => setPaymentMethod("KHQR")}
-                className={`flex items-center justify-center gap-2 rounded-xl border py-3 px-3 text-xs sm:text-sm font-black transition ${
+                className={`flex items-center justify-center gap-2 rounded-xl border py-2.5 px-3 text-xs sm:text-sm font-black transition ${
                   paymentMethod === "KHQR"
-                    ? "border-rose-500 bg-gradient-to-r from-rose-950/60 to-red-950/50 text-white shadow-lg shadow-rose-950/40"
+                    ? "border-rose-500 bg-gradient-to-r from-rose-950/70 to-red-950/60 text-white shadow-lg shadow-rose-950/40"
                     : "border-slate-800 bg-slate-950/60 text-slate-400 hover:text-white hover:border-slate-700"
                 }`}
               >
                 <span className="flex h-5 items-center px-1.5 rounded bg-[#E1251B] text-white text-[11px] font-black tracking-tight">
                   KHQR
                 </span>
-                <span>Scan & Pay</span>
+                <span>ABA' QR / KHQR</span>
               </button>
               <button
                 type="button"
                 onClick={() => setPaymentMethod("TELEGRAM")}
-                className={`flex items-center justify-center gap-2 rounded-xl border py-3 px-3 text-xs sm:text-sm font-bold transition ${
+                className={`flex items-center justify-center gap-2 rounded-xl border py-2.5 px-3 text-xs sm:text-sm font-bold transition ${
                   paymentMethod === "TELEGRAM"
-                    ? "border-sky-500 bg-gradient-to-r from-sky-950/60 to-blue-950/50 text-sky-400 shadow-lg shadow-sky-950/40"
+                    ? "border-sky-500 bg-gradient-to-r from-sky-950/70 to-blue-950/60 text-sky-400 shadow-lg shadow-sky-950/40"
                     : "border-slate-800 bg-slate-950/60 text-slate-400 hover:text-white hover:border-slate-700"
                 }`}
               >
@@ -200,54 +202,50 @@ export default function CheckoutModal({ product, onClose }: CheckoutModalProps) 
             </div>
           </div>
 
-          {/* TAB 1: KHQR (Bakong / ABA / All Banks) */}
+          {/* TAB 1: KHQR (ABA' QR / Bakong / All KH Banks) */}
           {paymentMethod === "KHQR" && (
             <div className="space-y-4 rounded-2xl border border-rose-500/40 bg-gradient-to-b from-rose-950/30 via-slate-950 to-slate-950 p-4 sm:p-5">
-              {/* KHQR Official Banner */}
+              {/* Official Header */}
               <div className="flex items-center justify-between border-b border-rose-900/30 pb-3">
                 <div className="flex items-center gap-2">
-                  <div className="px-2.5 py-1 rounded-md bg-[#E1251B] text-white font-black text-xs tracking-wider shadow">
+                  <div className="px-2 py-0.5 rounded bg-[#E1251B] text-white font-black text-xs tracking-wider shadow">
                     KHQR
                   </div>
                   <div>
-                    <h5 className="text-xs font-bold text-white tracking-wide">Cambodia Universal QR</h5>
-                    <p className="text-[10px] text-slate-400">Bakong · ABA · Wing · ACLEDA · All Banks</p>
+                    <h5 className="text-xs font-bold text-white tracking-wide">ABA' QR & Bakong</h5>
+                    <p className="text-[10px] text-slate-400">All KH Banks Supported</p>
                   </div>
                 </div>
                 <div className="text-right">
-                  <span className="text-[10px] uppercase font-semibold text-slate-400 block">Receiver</span>
+                  <span className="text-[10px] uppercase font-semibold text-slate-400 block">Account Name</span>
                   <span className="text-xs font-black text-rose-300 font-mono">{KHQR_CONFIG.merchantName}</span>
                 </div>
               </div>
 
-              {/* QR Code Container */}
+              {/* Main QR Display */}
               <div className="flex flex-col sm:flex-row items-center gap-4 py-1">
-                {/* QR Display Card */}
-                <div className="relative shrink-0 w-44 h-44 sm:w-48 sm:h-48 rounded-2xl bg-white p-3 shadow-xl flex items-center justify-center border-4 border-rose-500/80">
+                {/* Official ABA QR Card */}
+                <div className="relative shrink-0 w-48 sm:w-52 rounded-2xl bg-white p-2 shadow-2xl flex flex-col items-center border-4 border-rose-500/80 overflow-hidden group">
                   <img
                     src={qrImageSrc}
-                    alt="KHQR Payment QR Code"
-                    className="w-full h-full object-contain"
+                    alt="ABA KHQR Payment"
+                    className="w-full h-auto max-h-64 object-contain rounded-lg"
                     onError={() => {
-                      // Fallback to default generated QR if custom image not found
                       const fallback = getAssetPath("/images/khqr-default.svg");
-                      if (qrImageSrc !== fallback) {
-                        setQrImageSrc(fallback);
-                      }
+                      if (qrImageSrc !== fallback) setQrImageSrc(fallback);
                     }}
                   />
-                  {/* Central KHQR Badge */}
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div className="px-2 py-0.5 rounded bg-[#E1251B] text-white text-[10px] font-black shadow-md border border-white">
-                      KHQR
-                    </div>
+                  <div className="w-full text-center pt-1.5 pb-0.5">
+                    <span className="text-[10px] font-bold text-slate-600 tracking-wider">
+                      SCAN WITH ANY BANK APP
+                    </span>
                   </div>
                 </div>
 
-                {/* Amount and Instructions */}
-                <div className="w-full space-y-3">
+                {/* Account Details & Remarks */}
+                <div className="w-full space-y-2.5">
                   <div>
-                    <span className="text-[10px] uppercase font-bold text-slate-400 block">Payment Total</span>
+                    <span className="text-[10px] uppercase font-bold text-slate-400 block">Amount to Pay</span>
                     <div className="flex items-baseline gap-2">
                       <span className="text-2xl font-black text-amber-400 font-mono">${product.price.toFixed(2)}</span>
                       <span className="text-sm font-bold text-emerald-400 font-mono">({khrPrice.toLocaleString()} ៛)</span>
@@ -255,17 +253,17 @@ export default function CheckoutModal({ product, onClose }: CheckoutModalProps) 
                   </div>
 
                   {/* Transfer Note / Remark (Crucial) */}
-                  <div className="rounded-xl border border-slate-800 bg-slate-900/90 p-2.5 space-y-1">
+                  <div className="rounded-xl border border-rose-500/30 bg-slate-900/90 p-2.5 space-y-1">
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] uppercase tracking-wider font-bold text-slate-400">
+                      <span className="text-[10px] uppercase tracking-wider font-bold text-rose-400">
                         Transfer Remark (Memo)
                       </span>
                       <button
                         type="button"
-                        onClick={handleCopyRemark}
+                        onClick={() => handleCopy("memo", transferMemo)}
                         className="inline-flex items-center gap-1 text-[11px] font-bold text-sky-400 hover:text-sky-300 transition"
                       >
-                        {copiedRemark ? (
+                        {copiedKey === "memo" ? (
                           <>
                             <Check className="w-3 h-3 text-emerald-400" />
                             <span className="text-emerald-400">Copied!</span>
@@ -281,15 +279,48 @@ export default function CheckoutModal({ product, onClose }: CheckoutModalProps) 
                     <div className="rounded-lg bg-slate-950 px-2 py-1.5 font-mono text-xs text-white border border-slate-800 select-all truncate">
                       {transferMemo}
                     </div>
-                    <p className="text-[10px] text-amber-400/90">
-                      *Please paste this remark in your bank app so admin can identify your payment!
+                    <p className="text-[10px] text-amber-400/90 leading-tight">
+                      *Please put your IGN in the transfer note so admin can deliver your order!
                     </p>
                   </div>
 
-                  {/* Download QR button */}
+                  {/* Manual Account Numbers (ABA) */}
+                  <div className="rounded-xl border border-slate-800 bg-slate-950/90 p-2.5 space-y-1.5 text-xs">
+                    <div className="flex items-center justify-between text-slate-300">
+                      <span className="text-[10px] text-slate-400 font-semibold">USD Account ($):</span>
+                      <div className="flex items-center gap-1.5">
+                        <span className="font-mono font-bold text-white">{KHQR_CONFIG.accountUsd}</span>
+                        <button
+                          type="button"
+                          onClick={() => handleCopy("usd", KHQR_CONFIG.accountUsd.replace(/\s+/g, ""))}
+                          className="p-1 text-slate-400 hover:text-sky-400 transition"
+                          title="Copy USD Account"
+                        >
+                          {copiedKey === "usd" ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between text-slate-300 pt-1 border-t border-slate-800/80">
+                      <span className="text-[10px] text-slate-400 font-semibold">KHR Account (៛):</span>
+                      <div className="flex items-center gap-1.5">
+                        <span className="font-mono font-bold text-white">{KHQR_CONFIG.accountKhr}</span>
+                        <button
+                          type="button"
+                          onClick={() => handleCopy("khr", KHQR_CONFIG.accountKhr.replace(/\s+/g, ""))}
+                          className="p-1 text-slate-400 hover:text-sky-400 transition"
+                          title="Copy KHR Account"
+                        >
+                          {copiedKey === "khr" ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Save QR button */}
                   <a
                     href={qrImageSrc}
-                    download="BEJENGMC-KHQR.png"
+                    download="ABA-KHQR-CHAIDY-TO.jpg"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-1.5 w-full rounded-xl border border-slate-700 bg-slate-900/60 py-2 text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition"
@@ -300,15 +331,16 @@ export default function CheckoutModal({ product, onClose }: CheckoutModalProps) 
                 </div>
               </div>
 
-              {/* Step Guide */}
-              <div className="rounded-xl bg-slate-950/80 p-3 border border-slate-800 text-[11px] text-slate-300 space-y-1.5">
+              {/* Instructions */}
+              <div className="rounded-xl bg-slate-950/80 p-3 border border-slate-800 text-[11px] text-slate-300 space-y-1">
                 <div className="flex items-center gap-2 font-bold text-white text-xs">
                   <Smartphone className="w-3.5 h-3.5 text-rose-400" />
                   <span>How to complete payment:</span>
                 </div>
-                <ol className="list-decimal list-inside space-y-1 text-slate-400 pl-1">
-                  <li>Open <strong>ABA Mobile, Bakong, Wing, ACLEDA</strong> or any KHQR app.</li>
-                  <li>Scan the QR code and paste your <strong>Remark ({transferMemo})</strong>.</li>
+                <ol className="list-decimal list-inside space-y-0.5 text-slate-400 pl-1">
+                  <li>Scan with <strong>ABA Mobile, Bakong, Wing, ACLEDA</strong> or any KHQR app.</li>
+                  <li>Enter <strong>${product.price.toFixed(2)} USD</strong> (or {khrPrice.toLocaleString()} ៛).</li>
+                  <li>Paste <strong>{transferMemo}</strong> in the transfer remark/note.</li>
                   <li>Tap <strong>"I Have Paid"</strong> below to send your receipt to admin.</li>
                 </ol>
               </div>
