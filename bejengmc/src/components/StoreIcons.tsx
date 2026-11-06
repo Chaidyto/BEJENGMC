@@ -331,3 +331,93 @@ export function ItemIcon({ type, imageUrl, className = "", size = "md" }: { type
       );
   }
 }
+
+export function PetIcon({ type, className = "", size = "md" }: { type: string } & IconProps) {
+  const sizeClasses = {
+    sm: "w-8 h-8",
+    md: "w-12 h-12",
+    lg: "w-20 h-20",
+    xl: "w-28 h-28",
+  };
+
+  switch (type) {
+    case "pet_ranger":
+      // Ranger: Pink/Magenta Speed Dagger & Wings
+      return (
+        <div className={`relative flex items-center justify-center rounded-xl bg-gradient-to-br from-pink-500/25 via-fuchsia-600/15 to-transparent border border-pink-500/50 p-2 shadow-[0_0_20px_rgba(236,72,153,0.35)] ${sizeClasses[size]} ${className}`}>
+          <svg viewBox="0 0 24 24" fill="none" className="w-full h-full text-pink-400 drop-shadow-[0_0_10px_rgba(236,72,153,0.85)]">
+            <path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9L12 2Z" fill="#DB2777" fillOpacity="0.25" stroke="#F472B6" strokeWidth="1.8" />
+            <circle cx="12" cy="12" r="3" fill="#F43F5E" />
+            <path d="M12 6V18M6 12H18" stroke="#FCE7F3" strokeWidth="1.5" strokeLinecap="round" />
+          </svg>
+        </div>
+      );
+
+    case "pet_luna":
+      // Luna: Celestial Emerald Lunar Crescent & Star
+      return (
+        <div className={`relative flex items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500/25 via-teal-600/15 to-transparent border border-emerald-500/50 p-2 shadow-[0_0_20px_rgba(16,185,129,0.35)] ${sizeClasses[size]} ${className}`}>
+          <svg viewBox="0 0 24 24" fill="none" className="w-full h-full text-emerald-400 drop-shadow-[0_0_10px_rgba(16,185,129,0.85)]">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" fill="#059669" fillOpacity="0.3" stroke="#34D399" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            <circle cx="16" cy="7" r="1.5" fill="#A7F3D0" />
+            <path d="M14 12L15 15L18 16L15 17L14 20L13 17L10 16L13 15L14 12Z" fill="#6EE7B7" />
+          </svg>
+        </div>
+      );
+
+    case "pet_igris":
+      // Igris: Royal Purple/Violet Shadow Knight Helmet & Horns
+      return (
+        <div className={`relative flex items-center justify-center rounded-xl bg-gradient-to-br from-purple-500/30 via-indigo-600/20 to-transparent border border-purple-500/60 p-2 shadow-[0_0_22px_rgba(168,85,247,0.4)] ${sizeClasses[size]} ${className}`}>
+          <svg viewBox="0 0 24 24" fill="none" className="w-full h-full text-purple-400 drop-shadow-[0_0_12px_rgba(168,85,247,0.9)]">
+            <path d="M12 2L14 6H10L12 2Z" fill="#C084FC" />
+            <path d="M5 8C5 8 7 4 12 4C17 4 19 8 19 8V14C19 18 16 21 12 22C8 21 5 18 5 14V8Z" fill="#6B21A8" fillOpacity="0.3" stroke="#A855F7" strokeWidth="1.8" />
+            <path d="M9 11H15M12 11V18" stroke="#E9D5FF" strokeWidth="2" strokeLinecap="round" />
+            <circle cx="8" cy="13" r="1" fill="#F43F5E" />
+            <circle cx="16" cy="13" r="1" fill="#F43F5E" />
+          </svg>
+        </div>
+      );
+
+    case "pet_beru":
+      // Beru: Blood Red Shadow Ant King Mandibles
+      return (
+        <div className={`relative flex items-center justify-center rounded-xl bg-gradient-to-br from-red-600/30 via-rose-700/20 to-transparent border border-red-500/60 p-2 shadow-[0_0_22px_rgba(239,68,68,0.4)] ${sizeClasses[size]} ${className}`}>
+          <svg viewBox="0 0 24 24" fill="none" className="w-full h-full text-red-400 drop-shadow-[0_0_12px_rgba(239,68,68,0.9)]">
+            <circle cx="12" cy="12" r="5" fill="#7F1D1D" fillOpacity="0.4" stroke="#EF4444" strokeWidth="1.8" />
+            <path d="M7 6C5 9 5 15 7 18M17 6C19 9 19 15 17 18" stroke="#F87171" strokeWidth="2.2" strokeLinecap="round" />
+            <circle cx="10" cy="11" r="1.5" fill="#FEE2E2" />
+            <circle cx="14" cy="11" r="1.5" fill="#FEE2E2" />
+            <path d="M12 4V8M10 16L12 18L14 16" stroke="#EF4444" strokeWidth="1.8" strokeLinecap="round" />
+          </svg>
+        </div>
+      );
+
+    case "pet_parrot":
+      // Parrot: Golden Tropical Feathers
+      return (
+        <div className={`relative flex items-center justify-center rounded-xl bg-gradient-to-br from-amber-500/25 via-yellow-600/15 to-transparent border border-amber-500/50 p-2 shadow-[0_0_20px_rgba(245,158,11,0.35)] ${sizeClasses[size]} ${className}`}>
+          <svg viewBox="0 0 24 24" fill="none" className="w-full h-full text-amber-400 drop-shadow-[0_0_10px_rgba(245,158,11,0.85)]">
+            <path d="M10 3C7 5 6 9 6 13C6 17 9 20 12 21V16C10 16 9 14 9 12C9 9 11 6 14 5C14 4 13 3 10 3Z" fill="#B45309" fillOpacity="0.3" stroke="#F59E0B" strokeWidth="1.8" />
+            <path d="M13 5C16 6 18 9 18 13C18 16 16 19 13 20" stroke="#FBBF24" strokeWidth="1.8" strokeLinecap="round" />
+            <circle cx="11" cy="8" r="1.5" fill="#FEF08A" />
+            <path d="M7 10L4 12L7 13" stroke="#F59E0B" strokeWidth="1.8" strokeLinecap="round" />
+          </svg>
+        </div>
+      );
+
+    case "pet_wolf":
+    default:
+      // Wolf: Cyan/Aqua Lunar Wolf Guardian
+      return (
+        <div className={`relative flex items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400/30 via-sky-600/20 to-blue-950/40 border border-cyan-400/70 p-2 shadow-[0_0_25px_rgba(34,211,238,0.45)] ${sizeClasses[size]} ${className}`}>
+          <svg viewBox="0 0 24 24" fill="none" className="w-full h-full text-cyan-300 drop-shadow-[0_0_12px_rgba(34,211,238,0.95)]">
+            <path d="M4 5L7 12L12 9L17 12L20 5L16 16L12 20L8 16L4 5Z" fill="#0891B2" fillOpacity="0.3" stroke="#22D3EE" strokeWidth="1.8" strokeLinejoin="round" />
+            <circle cx="9" cy="11" r="1.5" fill="#E0F2FE" />
+            <circle cx="15" cy="11" r="1.5" fill="#E0F2FE" />
+            <path d="M12 13V16M11 15H13" stroke="#67E8F9" strokeWidth="1.6" strokeLinecap="round" />
+          </svg>
+        </div>
+      );
+  }
+}

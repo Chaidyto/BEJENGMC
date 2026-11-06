@@ -64,6 +64,29 @@ export interface StoreItemData {
   deliveryInfo: string;
 }
 
+export interface PetEffect {
+  symbol: string;
+  symbolColor: string; // Tailwind color or hex
+  name: string; // "SPEED II", "STRENGTH II", etc.
+}
+
+export interface PetData {
+  id: string;
+  name: string;
+  price: number;
+  rarity: "Common" | "Rare" | "Epic" | "Legendary" | "Mythic";
+  badgeColor: string;
+  glowColor: string;
+  accentGradient: string;
+  shortDesc: string;
+  fullDesc: string;
+  iconType: string;
+  imageUrl?: string;
+  effects: PetEffect[];
+  rawDescription: string[];
+  deliveryInfo: string;
+}
+
 // Official Network Configuration
 export const SERVER_IP = "bejengmc.lol";
 export const BEDROCK_PORT = 62173;
@@ -695,5 +718,151 @@ export const STORE_ITEMS: StoreItemData[] = [
       "§4§oContains glowing soul fire embers",
     ],
     deliveryInfo: "Delivered as stackable crate blocks directly to your claim.",
+  },
+];
+
+// 6 Official Server Companion Pets
+export const STORE_PETS: PetData[] = [
+  {
+    id: "pet-ranger",
+    name: "Ranger Pet",
+    price: 2.00,
+    rarity: "Rare",
+    badgeColor: "text-pink-400 border-pink-500/40 bg-pink-500/10",
+    glowColor: "hover:border-pink-500/60 hover:shadow-[0_0_30px_rgba(236,72,153,0.3)]",
+    accentGradient: "from-pink-500/20 via-slate-900 to-slate-950",
+    shortDesc: "Swift companion providing permanent SPEED I and STRENGTH II effects.",
+    fullDesc: "Equip the Ranger Pet to gain swift movement and elevated melee combat power throughout all survival worlds and arenas.",
+    iconType: "pet_ranger",
+    effects: [
+      { symbol: "⏵", symbolColor: "text-pink-400", name: "SPEED I" },
+      { symbol: "⏵", symbolColor: "text-pink-400", name: "STRENGTH II" },
+    ],
+    rawDescription: [
+      "&fEffect:",
+      "  &d⏵ &7SPEED I",
+      "  &d⏵ &7STRENGTH II",
+    ],
+    deliveryInfo: "Delivered directly into your in-game pet inventory (/pet).",
+  },
+  {
+    id: "pet-luna",
+    name: "Luna Pet",
+    price: 2.00,
+    rarity: "Rare",
+    badgeColor: "text-emerald-400 border-emerald-500/40 bg-emerald-500/10",
+    glowColor: "hover:border-emerald-500/60 hover:shadow-[0_0_30px_rgba(16,185,129,0.3)]",
+    accentGradient: "from-emerald-500/20 via-slate-900 to-slate-950",
+    shortDesc: "Celestial spirit companion granting boosted SPEED II and STRENGTH II buffs.",
+    fullDesc: "Channel the power of the moonlight with Luna. Grants high-tier Speed II mobility paired with Strength II attack bonus.",
+    iconType: "pet_luna",
+    effects: [
+      { symbol: "⏵", symbolColor: "text-emerald-400", name: "SPEED II" },
+      { symbol: "⏵", symbolColor: "text-emerald-400", name: "STRENGTH II" },
+    ],
+    rawDescription: [
+      "&fEffect:",
+      "  &a⏵ &7SPEED II",
+      "  &a⏵ &7STRENGTH II",
+    ],
+    deliveryInfo: "Delivered directly into your in-game pet inventory (/pet).",
+  },
+  {
+    id: "pet-igris",
+    name: "Igris Pet",
+    price: 3.00,
+    rarity: "Epic",
+    badgeColor: "text-purple-400 border-purple-500/40 bg-purple-500/10",
+    glowColor: "hover:border-purple-500/60 hover:shadow-[0_0_30px_rgba(168,85,247,0.35)]",
+    accentGradient: "from-purple-500/20 via-slate-900 to-slate-950",
+    shortDesc: "Shadow Commander Pet granting SPEED II, STRENGTH II, and FIRE RESISTANCE I.",
+    fullDesc: "Command the noble Shadow Knight Commander Igris. Bestows rapid velocity, crushing combat strength, and absolute heat immunity.",
+    iconType: "pet_igris",
+    effects: [
+      { symbol: "⏵", symbolColor: "text-purple-400", name: "SPEED II" },
+      { symbol: "⏵", symbolColor: "text-purple-400", name: "STRENGTH II" },
+      { symbol: "⏵", symbolColor: "text-purple-400", name: "FIRE RESISTANCE I" },
+    ],
+    rawDescription: [
+      "&fEffect:",
+      "  &5⏵ &7SPEED II",
+      "  &5⏵ &7STRENGTH II",
+      "  &5⏵ &7FIRE RESISTANCE I",
+    ],
+    deliveryInfo: "Delivered directly into your in-game pet inventory (/pet).",
+  },
+  {
+    id: "pet-beru",
+    name: "Beru Pet",
+    price: 3.00,
+    rarity: "Epic",
+    badgeColor: "text-red-400 border-red-500/40 bg-red-500/10",
+    glowColor: "hover:border-red-500/60 hover:shadow-[0_0_30px_rgba(239,68,68,0.35)]",
+    accentGradient: "from-red-500/20 via-slate-900 to-slate-950",
+    shortDesc: "Ferocious Ant King Pet granting SPEED II, STRENGTH II, and FIRE RESISTANCE I.",
+    fullDesc: "Unleash the unstoppable frenzy of Shadow Ant King Beru. Grants ferocious speed, overwhelming offensive might, and complete fire protection.",
+    iconType: "pet_beru",
+    effects: [
+      { symbol: "⏵", symbolColor: "text-red-400", name: "SPEED II" },
+      { symbol: "⏵", symbolColor: "text-red-400", name: "STRENGTH II" },
+      { symbol: "⏵", symbolColor: "text-red-400", name: "FIRE RESISTANCE I" },
+    ],
+    rawDescription: [
+      "&fEffect:",
+      "  &4⏵ &7SPEED II",
+      "  &4⏵ &7STRENGTH II",
+      "  &4⏵ &7FIRE RESISTANCE I",
+    ],
+    deliveryInfo: "Delivered directly into your in-game pet inventory (/pet).",
+  },
+  {
+    id: "pet-parrot",
+    name: "Parrot Pet",
+    price: 4.00,
+    rarity: "Legendary",
+    badgeColor: "text-amber-400 border-amber-500/40 bg-amber-500/10",
+    glowColor: "hover:border-amber-400/60 hover:shadow-[0_0_30px_rgba(245,158,11,0.35)]",
+    accentGradient: "from-amber-500/20 via-slate-900 to-slate-950",
+    shortDesc: "Golden exotic companion with SPEED II, STRENGTH II, and FIRE RESISTANCE I.",
+    fullDesc: "Soar with the mystical tropical Parrot companion. Offers continuous high agility, fierce battle enhancements, and fire immunity.",
+    iconType: "pet_parrot",
+    effects: [
+      { symbol: "⏵", symbolColor: "text-amber-400", name: "SPEED II" },
+      { symbol: "⏵", symbolColor: "text-amber-400", name: "STRENGTH II" },
+      { symbol: "⏵", symbolColor: "text-amber-400", name: "FIRE RESISTANCE I" },
+    ],
+    rawDescription: [
+      "&fEffect:",
+      "  &6⏵ &7SPEED II",
+      "  &6⏵ &7STRENGTH II",
+      "  &6⏵ &7FIRE RESISTANCE I",
+    ],
+    deliveryInfo: "Delivered directly into your in-game pet inventory (/pet).",
+  },
+  {
+    id: "pet-wolf",
+    name: "Wolf Pet",
+    price: 5.00,
+    rarity: "Mythic",
+    badgeColor: "text-cyan-300 border-cyan-400/60 bg-cyan-500/15",
+    glowColor: "hover:border-cyan-400/80 hover:shadow-[0_0_35px_rgba(34,211,238,0.45)]",
+    accentGradient: "from-cyan-500/25 via-blue-900/30 to-slate-950",
+    shortDesc: "Apex Mythic Companion with SPEED II, STRENGTH II, FIRE RESISTANCE I, and REGENERATION I.",
+    fullDesc: "The pinnacle legendary companion of BeJengMC. Blesses the player with maximum speed, destructive strength, flame resistance, and continuous life regeneration.",
+    iconType: "pet_wolf",
+    effects: [
+      { symbol: "⏵", symbolColor: "text-cyan-300", name: "SPEED II" },
+      { symbol: "⏵", symbolColor: "text-cyan-300", name: "STRENGTH II" },
+      { symbol: "⏵", symbolColor: "text-cyan-300", name: "FIRE RESISTANCE I" },
+      { symbol: "⏵", symbolColor: "text-cyan-300", name: "REGENERATION I" },
+    ],
+    rawDescription: [
+      "&fEffect:",
+      "  &b⏵ &7SPEED II",
+      "  &b⏵ &7STRENGTH II",
+      "  &b⏵ &7FIRE RESISTANCE I",
+      "  &b⏵ &7REGENERATION I",
+    ],
+    deliveryInfo: "Delivered directly into your in-game pet inventory (/pet).",
   },
 ];

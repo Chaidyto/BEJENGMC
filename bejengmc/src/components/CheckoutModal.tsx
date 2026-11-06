@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import { X, Send, ShieldCheck, Sparkles, ExternalLink } from "lucide-react";
-import { RankData, StoreItemData, getTelegramOrderUrl, TELEGRAM_USERNAME, TELEGRAM_LINK } from "@/data/store-data";
-import { RankIcon, ItemIcon } from "./StoreIcons";
+import { RankData, StoreItemData, PetData, getTelegramOrderUrl, TELEGRAM_USERNAME, TELEGRAM_LINK } from "@/data/store-data";
+import { RankIcon, ItemIcon, PetIcon } from "./StoreIcons";
 
 interface CheckoutModalProps {
-  product: RankData | StoreItemData | null;
+  product: RankData | StoreItemData | PetData | null;
   onClose: () => void;
 }
 
@@ -17,6 +17,7 @@ export default function CheckoutModal({ product, onClose }: CheckoutModalProps) 
   if (!product) return null;
 
   const isRank = "commands" in product;
+  const isPet = "effects" in product;
   const telegramUrl = getTelegramOrderUrl(product.name, product.price, username, edition);
 
   return (
@@ -54,15 +55,21 @@ export default function CheckoutModal({ product, onClose }: CheckoutModalProps) 
           <div className="rounded-2xl border border-slate-800 bg-slate-950 p-4 flex items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               {isRank ? (
-                <RankIcon type={product.iconType} imageUrl={product.imageUrl} size="sm" />
+                <RankIcon type={product.iconType} imageUrl={(product as RankData).imageUrl} size="sm" />
+              ) : isPet ? (
+                <PetIcon type={product.iconType} size="sm" />
               ) : (
-                <ItemIcon type={product.iconType} imageUrl={product.imageUrl} size="sm" />
+                <ItemIcon type={product.iconType} imageUrl={(product as StoreItemData).imageUrl} size="sm" />
               )}
               <div>
                 <span className="text-[10px] uppercase tracking-wider font-semibold text-slate-400">Selected Product</span>
                 <h4 className="text-base font-black text-white">{product.name}</h4>
                 <p className="text-xs text-slate-400">
-                  {isRank ? "Permanent Lifetime Rank" : `Deliverable (${(product as StoreItemData).amount})`}
+                  {isRank
+                    ? `${(product as RankData).duration} Rank`
+                    : isPet
+                    ? "Permanent Companion Pet"
+                    : `Deliverable (${(product as StoreItemData).amount})`}
                 </p>
               </div>
             </div>

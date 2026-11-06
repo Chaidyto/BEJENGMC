@@ -2,24 +2,27 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, Shield, Sparkles, ShoppingBag, Package, Zap, HelpCircle, Search, Send, Layers } from "lucide-react";
-import { STORE_RANKS, STORE_ITEMS, RankData, StoreItemData, TELEGRAM_USERNAME } from "@/data/store-data";
+import { ArrowLeft, Shield, Sparkles, ShoppingBag, Package, Zap, HelpCircle, Search, Send, Layers, HeartPulse } from "lucide-react";
+import { STORE_RANKS, STORE_ITEMS, STORE_PETS, RankData, StoreItemData, PetData, TELEGRAM_USERNAME } from "@/data/store-data";
 import RankCard from "@/components/RankCard";
 import ItemCard from "@/components/ItemCard";
+import PetCard from "@/components/PetCard";
 import RankDetailModal from "@/components/RankDetailModal";
 import ItemDetailModal from "@/components/ItemDetailModal";
+import PetDetailModal from "@/components/PetDetailModal";
 import CheckoutModal from "@/components/CheckoutModal";
 import { getAssetPath } from "@/lib/assets";
 import BrandLogo from "@/components/BrandLogo";
 
 export default function StorePage() {
-  const [activeTab, setActiveTab] = useState<"RANK" | "ITEMS">("RANK");
+  const [activeTab, setActiveTab] = useState<"RANK" | "ITEMS" | "PETS">("RANK");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedRank, setSelectedRank] = useState<RankData | null>(null);
   const [selectedItem, setSelectedItem] = useState<StoreItemData | null>(null);
-  const [checkoutProduct, setCheckoutProduct] = useState<RankData | StoreItemData | null>(null);
+  const [selectedPet, setSelectedPet] = useState<PetData | null>(null);
+  const [checkoutProduct, setCheckoutProduct] = useState<RankData | StoreItemData | PetData | null>(null);
 
-  // Filter items or ranks based on search query
+  // Filter items, ranks, or pets based on search query
   const filteredRanks = STORE_RANKS.filter((r) =>
     r.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     r.shortDesc.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -30,6 +33,12 @@ export default function StorePage() {
     i.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     i.shortDesc.toLowerCase().includes(searchQuery.toLowerCase()) ||
     i.amount.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const filteredPets = STORE_PETS.filter((p) =>
+    p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    p.shortDesc.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    p.effects.some((e) => e.name.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
   return (
@@ -72,7 +81,7 @@ export default function StorePage() {
               Upgrade Your Experience
             </h1>
             <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-              Purchase <strong>Ranks, Kits, Items, Money, Keys, Mace, DailyPass, and Wolf Spawners</strong>. Connect directly on Telegram (<strong className="text-sky-400 font-mono">@{TELEGRAM_USERNAME}</strong>) for instant in-game delivery.
+              Purchase <strong>Ranks, Kits, In-Game Items, Companion Pets, Money, Keys, and Mace</strong>. Connect directly on Telegram (<strong className="text-sky-400 font-mono">@{TELEGRAM_USERNAME}</strong>) for instant in-game delivery.
             </p>
           </div>
 
@@ -87,17 +96,17 @@ export default function StorePage() {
           </div>
         </div>
 
-        {/* Main Store Navigation: 2 Main Categories (RANK & ITEMS) */}
+        {/* Main Store Navigation: 3 Main Categories (1. RANKS, 2. ITEMS, 3. PETS) */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pt-2">
           {/* Category Tabs */}
-          <div className="flex items-center gap-2 rounded-2xl border border-slate-800 bg-slate-900/80 p-1.5 shadow-inner">
+          <div className="flex flex-wrap items-center gap-2 rounded-2xl border border-slate-800 bg-slate-900/80 p-1.5 shadow-inner">
             <button
               type="button"
               onClick={() => {
                 setActiveTab("RANK");
                 setSearchQuery("");
               }}
-              className={`flex items-center gap-2.5 rounded-xl px-6 py-3 text-sm font-extrabold tracking-wider transition-all duration-200 ${
+              className={`flex items-center gap-2.5 rounded-xl px-5 py-3 text-sm font-extrabold tracking-wider transition-all duration-200 ${
                 activeTab === "RANK"
                   ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg shadow-blue-500/25 scale-[1.02]"
                   : "text-slate-300 hover:text-white hover:bg-slate-800/60"
@@ -116,7 +125,7 @@ export default function StorePage() {
                 setActiveTab("ITEMS");
                 setSearchQuery("");
               }}
-              className={`flex items-center gap-2.5 rounded-xl px-6 py-3 text-sm font-extrabold tracking-wider transition-all duration-200 ${
+              className={`flex items-center gap-2.5 rounded-xl px-5 py-3 text-sm font-extrabold tracking-wider transition-all duration-200 ${
                 activeTab === "ITEMS"
                   ? "bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 shadow-lg shadow-amber-500/25 scale-[1.02]"
                   : "text-slate-300 hover:text-white hover:bg-slate-800/60"
@@ -126,6 +135,25 @@ export default function StorePage() {
               2. ITEMS
               <span className={`text-[10px] px-2 py-0.5 rounded-full font-mono ${activeTab === "ITEMS" ? "bg-slate-950/20 text-slate-950 font-bold" : "bg-slate-800 text-slate-400"}`}>
                 {STORE_ITEMS.length}
+              </span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                setActiveTab("PETS");
+                setSearchQuery("");
+              }}
+              className={`flex items-center gap-2.5 rounded-xl px-5 py-3 text-sm font-extrabold tracking-wider transition-all duration-200 ${
+                activeTab === "PETS"
+                  ? "bg-gradient-to-r from-pink-500 to-rose-600 text-white shadow-lg shadow-pink-500/25 scale-[1.02]"
+                  : "text-slate-300 hover:text-white hover:bg-slate-800/60"
+              }`}
+            >
+              <HeartPulse className="w-4 h-4" />
+              3. PETS
+              <span className={`text-[10px] px-2 py-0.5 rounded-full font-mono ${activeTab === "PETS" ? "bg-slate-950/40 text-white font-bold" : "bg-slate-800 text-slate-400"}`}>
+                {STORE_PETS.length}
               </span>
             </button>
           </div>
@@ -151,29 +179,51 @@ export default function StorePage() {
               <div className="flex items-center gap-2">
                 <span className="h-2 w-2 rounded-full bg-amber-400" />
                 <h2 className="text-2xl sm:text-3xl font-black text-white tracking-wide">
-                  {activeTab === "RANK" ? "Server Ranks" : "Server In-Game Items"}
+                  {activeTab === "RANK"
+                    ? "Server Ranks"
+                    : activeTab === "ITEMS"
+                    ? "Server In-Game Items"
+                    : "Server Companion Pets"}
                 </h2>
               </div>
               <p className="text-xs sm:text-sm text-slate-400 mt-1">
                 {activeTab === "RANK"
                   ? "Select a rank to inspect full permissions, land claims, and monthly perks."
-                  : "DailyPass, OP Keys, Standalone Kits, Heavy Mace, In-Game Money, and Wolf Spawners."}
+                  : activeTab === "ITEMS"
+                  ? "DailyPass, OP Keys, Standalone Kits, Heavy Mace, In-Game Money, and Wolf Spawners."
+                  : "Permanent companion pets providing continuous passive potion effects (Speed, Strength, Fire Resistance, Regeneration)."}
               </p>
             </div>
 
-            {/* Category Toggle Back Button */}
-            <button
-              onClick={() => setActiveTab(activeTab === "RANK" ? "ITEMS" : "RANK")}
-              type="button"
-              className="inline-flex items-center gap-1.5 self-start rounded-xl border border-slate-700 bg-slate-800/80 px-3 py-2 text-xs font-semibold text-slate-300 transition hover:bg-slate-700 hover:text-white"
-            >
-              Switch to {activeTab === "RANK" ? "Items" : "Ranks"}
-            </button>
+            {/* Category Quick Switcher */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() =>
+                  setActiveTab(
+                    activeTab === "RANK"
+                      ? "ITEMS"
+                      : activeTab === "ITEMS"
+                      ? "PETS"
+                      : "RANK"
+                  )
+                }
+                type="button"
+                className="inline-flex items-center gap-1.5 self-start rounded-xl border border-slate-700 bg-slate-800/80 px-3 py-2 text-xs font-semibold text-slate-300 transition hover:bg-slate-700 hover:text-white"
+              >
+                Next:{" "}
+                {activeTab === "RANK"
+                  ? "Items"
+                  : activeTab === "ITEMS"
+                  ? "Pets"
+                  : "Ranks"}{" "}
+                &rarr;
+              </button>
+            </div>
           </div>
 
           {/* Grid Layout */}
           {activeTab === "RANK" ? (
-            /* Ranks Grid (6 exact ranks in order: VIP -> MVP -> SKOR -> OMBIL -> BEJENG -> SOMLOR) */
+            /* Ranks Grid (6 exact ranks) */
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredRanks.map((rank) => (
                 <RankCard
@@ -184,7 +234,7 @@ export default function StorePage() {
                 />
               ))}
             </div>
-          ) : (
+          ) : activeTab === "ITEMS" ? (
             /* Items Grid (7 items) */
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {filteredItems.map((item) => (
@@ -196,11 +246,24 @@ export default function StorePage() {
                 />
               ))}
             </div>
+          ) : (
+            /* Pets Grid (6 pets) */
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredPets.map((pet) => (
+                <PetCard
+                  key={pet.id}
+                  pet={pet}
+                  onSelect={(p) => setSelectedPet(p)}
+                  onBuy={(p) => setCheckoutProduct(p)}
+                />
+              ))}
+            </div>
           )}
 
           {/* Empty search results fallback */}
           {((activeTab === "RANK" && filteredRanks.length === 0) ||
-            (activeTab === "ITEMS" && filteredItems.length === 0)) && (
+            (activeTab === "ITEMS" && filteredItems.length === 0) ||
+            (activeTab === "PETS" && filteredPets.length === 0)) && (
             <div className="text-center py-16 space-y-3">
               <ShoppingBag className="w-12 h-12 text-slate-600 mx-auto" />
               <p className="text-base font-semibold text-slate-300">No {activeTab.toLowerCase()} match your search.</p>
@@ -298,6 +361,16 @@ export default function StorePage() {
         onBuy={(item) => {
           setSelectedItem(null);
           setCheckoutProduct(item);
+        }}
+      />
+
+      {/* Detailed Pet Modal */}
+      <PetDetailModal
+        pet={selectedPet}
+        onClose={() => setSelectedPet(null)}
+        onBuy={(pet) => {
+          setSelectedPet(null);
+          setCheckoutProduct(pet);
         }}
       />
 
