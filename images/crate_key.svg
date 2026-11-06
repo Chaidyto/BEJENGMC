@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <filter id="goldKeyGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="0" stdDeviation="3.5" flood-color="#FBBF24" flood-opacity="0.85"/>
+    </filter>
+  </defs>
+  <g filter="url(#goldKeyGlow)">
+    <!-- Key Head (Skull / Crown shape) -->
+    <circle cx="22" cy="22" r="14" fill="#F59E0B" stroke="#FDE047" stroke-width="2.5"/>
+    <circle cx="22" cy="22" r="7" fill="#78350F" stroke="#FDE047" stroke-width="2"/>
+    <circle cx="22" cy="22" r="3" fill="#FBBF24"/>
+    <!-- Shaft -->
+    <rect x="28" y="27" width="26" height="5" transform="rotate(45 32 32)" fill="#F59E0B" stroke="#FDE047" stroke-width="1.5" rx="1"/>
+    <!-- Teeth -->
+    <rect x="44" y="38" width="6" height="4" transform="rotate(45 44 38)" fill="#FDE047"/>
+    <rect x="49" y="43" width="7" height="4" transform="rotate(45 49 43)" fill="#FDE047"/>
+  </g>
+  <!-- Sparkles -->
+  <polygon points="12,10 14,13 17,14 14,15 13,18 11,15 8,14 11,13" fill="#FFFBEB"/>
+  <polygon points="54,20 56,23 59,24 56,25 55,28 53,25 50,24 53,23" fill="#FFFBEB"/>
+</svg>

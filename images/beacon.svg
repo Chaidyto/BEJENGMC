@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <filter id="beaconBeam" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#38BDF8" flood-opacity="0.95"/>
+    </filter>
+    <linearGradient id="beamGrad" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#E0F2FE"/>
+    </linearGradient>
+  </defs>
+  <!-- Obsidian Base Block -->
+  <rect x="14" y="44" width="36" height="12" rx="2" fill="#18181B" stroke="#27272A" stroke-width="2"/>
+  <rect x="18" y="46" width="28" height="4" fill="#3F3F46" opacity="0.4"/>
+  <!-- Glass Outer Box -->
+  <rect x="18" y="24" width="28" height="22" rx="3" fill="#0284C7" fill-opacity="0.2" stroke="#38BDF8" stroke-width="2"/>
+  <!-- Nether Star Core -->
+  <polygon points="32,28 35,33 40,35 35,37 32,42 29,37 24,35 29,33" fill="#F8FAFC" stroke="#38BDF8" stroke-width="1.5"/>
+  <circle cx="32" cy="35" r="2.5" fill="#38BDF8"/>
+  <!-- Sky Beam -->
+  <rect x="29" y="4" width="6" height="20" fill="url(#beamGrad)" filter="url(#beaconBeam)"/>
+  <rect x="31" y="2" width="2" height="22" fill="#FFFFFF"/>
+</svg>
