@@ -9,7 +9,7 @@ interface RankCardProps {
 }
 
 export default function RankCard({ rank, onSelect, onBuy }: RankCardProps) {
-  const isHighestTier = rank.id === "somlor";
+  const isHighestTier = rank.id === "ultimate-somlor" || rank.id === "ultimate_somlor" || rank.tier === 6;
 
   return (
     <div

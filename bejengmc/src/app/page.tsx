@@ -109,7 +109,7 @@ export default function HomePage() {
                 className={`group flex flex-col items-center justify-center rounded-2xl border border-slate-800 bg-slate-950/60 p-4 text-center transition-all duration-200 hover:-translate-y-1 ${r.glowColor}`}
               >
                 <span className={`text-[10px] font-bold uppercase tracking-wider rounded-full px-2 py-0.5 border mb-2 ${r.badgeColor}`}>
-                  {r.id === "somlor" ? "Supreme Tier 6" : `Tier ${r.tier}`}
+                  {r.tier === 6 ? "Supreme Tier 6" : `Tier ${r.tier}`}
                 </span>
                 <h3 className="text-base font-black text-white group-hover:text-amber-300 transition-colors">
                   {r.name}

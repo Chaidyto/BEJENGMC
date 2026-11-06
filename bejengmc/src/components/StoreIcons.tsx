@@ -49,6 +49,18 @@ export function RankIcon({ type, imageUrl, className = "", size = "md" }: { type
         </div>
       );
 
+    case "rutdy":
+      // RUTDY: Rose/Ruby/Gold Warrior Shield
+      return (
+        <div className={`relative flex items-center justify-center rounded-xl bg-gradient-to-br from-rose-500/25 via-red-600/15 to-transparent border border-rose-500/50 p-2 shadow-[0_0_20px_rgba(244,63,94,0.35)] ${sizeClasses[size]} ${className}`}>
+          <svg viewBox="0 0 24 24" fill="none" className="w-full h-full text-rose-400 drop-shadow-[0_0_10px_rgba(244,63,94,0.85)]">
+            <path d="M12 2L4 5V11C4 16.5 7.5 20.5 12 22C16.5 20.5 20 16.5 20 11V5L12 2Z" fill="#E11D48" fillOpacity="0.25" stroke="#FB7185" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M12 6L14 10H18L15 13L16 17L12 14.5L8 17L9 13L6 10H10L12 6Z" fill="#FDA4AF" />
+            <circle cx="12" cy="12" r="1.5" fill="#FFF" />
+          </svg>
+        </div>
+      );
+
     case "skor":
       // SKOR: Cyan/Blue
       return (
@@ -86,9 +98,33 @@ export function RankIcon({ type, imageUrl, className = "", size = "md" }: { type
         </div>
       );
 
+    case "ultimate_somlor":
+    case "ultimate-somlor":
+      // ULTIMATE SOMLOR: Apex Supreme Radiance
+      return (
+        <div className={`relative flex items-center justify-center rounded-xl bg-gradient-to-br from-yellow-400/40 via-amber-500/30 to-purple-900/40 border border-yellow-400 p-2 shadow-[0_0_35px_rgba(250,204,21,0.65)] ring-1 ring-yellow-300/50 ${sizeClasses[size]} ${className}`}>
+          <svg viewBox="0 0 24 24" fill="none" className="w-full h-full text-yellow-300 drop-shadow-[0_0_14px_rgba(250,204,21,0.95)]">
+            <path d="M2 19L4 7L8 13L12 4L16 13L20 7L22 19H2Z" fill="url(#ultimateGradient)" fillOpacity="0.85" stroke="#FDE047" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            <circle cx="4" cy="6" r="1.5" fill="#FEF08A" />
+            <circle cx="12" cy="3" r="2" fill="#FFFFFF" />
+            <circle cx="20" cy="6" r="1.5" fill="#FEF08A" />
+            <circle cx="8" cy="12" r="1.2" fill="#E9D5FF" />
+            <circle cx="16" cy="12" r="1.2" fill="#E9D5FF" />
+            <path d="M4 19H20M6 21H18" stroke="#FBBF24" strokeWidth="2" strokeLinecap="round" />
+            <defs>
+              <linearGradient id="ultimateGradient" x1="2" y1="4" x2="22" y2="21" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#F59E0B" />
+                <stop offset="0.5" stopColor="#EAB308" />
+                <stop offset="1" stopColor="#9333EA" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+      );
+
     case "somlor":
     default:
-      // SOMLOR: Gold/Purple (Highest Supreme Tier)
+      // SOMLOR: Gold/Purple (Supreme Tier)
       return (
         <div className={`relative flex items-center justify-center rounded-xl bg-gradient-to-br from-amber-400/30 via-purple-600/25 to-amber-950/40 border border-amber-400/80 p-2 shadow-[0_0_35px_rgba(245,158,11,0.55)] ${sizeClasses[size]} ${className}`}>
           <svg viewBox="0 0 24 24" fill="none" className="w-full h-full text-amber-300 drop-shadow-[0_0_14px_rgba(245,158,11,0.95)]">
